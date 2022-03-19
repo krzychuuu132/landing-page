@@ -1,0 +1,18 @@
+@mixin grid ($col-md: 2, $col-lg: 3, $col-xl: 3) {
+	display: grid;
+	grid-gap: clamp(10px, 2vw, 30px);
+
+	@media screen and (min-width: 540px) and (max-width: 1023px) {
+		grid-template-columns: repeat($col-md, 1fr);
+	}
+
+	@include media-breakpoint-up(lg) {
+		grid-template-columns: repeat($col-lg, 1fr);
+	}
+	@if $col-lg != $col-xl {
+		@include media-breakpoint-up(xl) {
+			grid-template-columns: repeat($col-xl, 1fr);
+		}
+	}
+
+}
