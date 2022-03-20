@@ -1,11 +1,18 @@
-html,
 body {
-    overflow-x: hidden;
+    font-family: $primary-font;
 }
 
-html {}
+html {
+    font-size: 10px;
+}
 
 body {
     margin: 0;
-    font-size: 1.6em;
+}
+
+section {
+    padding: 4rem 0;
+    @include media-breakpoint-up(lg) {
+        padding: 9rem 0;
+    }
 }
