@@ -5,7 +5,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     mode: "development",
-    entry: "./js/script.js",
+    entry: "./ts/script.ts",
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "dist"),
@@ -17,11 +17,9 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
             },
             {
-                test: /\.js$/,
+                test: /\.tsx?$/,
+                use: 'ts-loader',
                 exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                },
             },
             {
                 test: /\.svg$/,
@@ -44,7 +42,11 @@ module.exports = {
             },
         ],
     },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+    },
     devServer: {
+        port: 3000,
         open: true,
         hot: true,
     },

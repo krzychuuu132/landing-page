@@ -3,6 +3,12 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 main {
     display: block;
 }
@@ -73,13 +79,4 @@ input {
 button,
 select {
     text-transform: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-p {
-    margin: 0;
 }
