@@ -34,7 +34,6 @@ export class Page {
     const parser = new DOMParser();
     if (typeof html !== "string") {
       html.forEach(item => {
-        console.log(item);
         const htmlDoc = parser.parseFromString(item, "text/html").body
           .children[0];
         parentElement.appendChild(htmlDoc);

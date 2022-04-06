@@ -1,4 +1,5 @@
 import { Page } from "../Page";
+import { Indicator } from "./Indicator";
 import { Slide } from "./Slide";
 
 interface SliderData {
@@ -16,17 +17,45 @@ export class Slider extends Page {
     this.counter = 1;
   }
 
-  renderSlides() {
-    const data = this.data.map(slide => new Slide(slide).render());
-    console.log(...data);
+  addListener(): void {
+    setInterval(() => {
+      this.counter++;
+      this.counter > this.data.length ? (this.counter = 1) : null;
+
+      this.changeSlide(this.counter - 1);
+    }, 5000);
+  }
+
+  changeSlide(index: number) {
+    const slides = document.querySelectorAll(".slides__slide");
+    const indicators = document.querySelectorAll(".indicators__indicator");
+    slides.forEach(slide => slide.classList.remove("active"));
+    slides[index].classList.add("active");
+
+    indicators.forEach(indicator => indicator.classList.remove("active"));
+    indicators[index].classList.add("active");
+
+    return index;
+  }
+
+  renderSlides(): string[] {
+    const data: string[] = this.data.map((slide, index) => new Slide(slide, index, this.counter).render());
     return data;
   }
 
-  renderIndiactors() {}
+  renderIndicators(): string[] {
+    const data: string[] = this.data.map((slide, index) => new Indicator(index, this).render());
+    return data;
+  }
 
   render(): void {
-    const slides = this.renderSlides();
+    this.addListener();
+    const sliderWrapper: HTMLElement = document.querySelector(".slides");
+    const indicatorsWrapper: HTMLElement = document.querySelector(".indicators");
+    const slides: string[] = this.renderSlides();
+    const indicators: string[] = this.renderIndicators();
 
-    super.renderHTML(document.querySelector(".slider"), slides);
+    super.renderHTML(sliderWrapper, slides);
+    super.renderHTML(indicatorsWrapper, indicators);
   }
 }

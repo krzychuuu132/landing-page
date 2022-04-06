@@ -6,19 +6,25 @@ interface SlideData {
 
 export class Slide {
   slide: SlideData;
-  constructor(slide: SlideData) {
+  index: number;
+  counter: number;
+  constructor(slide: SlideData, index: number, counter: number) {
     this.slide = slide;
   }
 
   render(): string {
     const { title, image, description } = this.slide;
 
-    const html = `
-        <div class="slide">
-            <h2>${title}</h2>
-            <img src="${image}" alt="${title}"/>
+    const html: string = `
+        <div class="slides__slide ${this.index === this.counter ? "active" : null}" style="background-image: url(${image});">
+        <div class="slides__slide-content">
+            <div class="container">
+            <h2 class="slides__slide-title">${title}</h2>
             ${description}
+            </div>
         </div>
+        </div>
+        
         `;
 
     return html;
