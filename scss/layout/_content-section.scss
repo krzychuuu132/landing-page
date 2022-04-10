@@ -1,0 +1,23 @@
+.content-section {
+  h2,
+  p {
+    color: $white;
+    width: fit-content;
+  }
+
+  h2::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  p {
+    max-width: 45rem;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

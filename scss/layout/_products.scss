@@ -1,0 +1,17 @@
+.products {
+  display: grid;
+  gap: 3rem;
+  padding: 4rem 0;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding: 8rem 0;
+  }
+}
