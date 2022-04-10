@@ -23,8 +23,7 @@ module.exports = {
             },
             {
                 test: /\.svg$/,
-                type: "asset/inline",
-                resourceQuery: /inline/,
+                loader: 'svg-inline-loader'
             },
             {
                 test: /\.jpg|png|svg$/,
@@ -60,7 +59,7 @@ module.exports = {
         }),
         new CopyPlugin({
             patterns: [
-                { from: "./images", to: "img" }
+                { from: "./img", to: "img" }
             ],
         }),
     ],

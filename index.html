@@ -1,64 +1,134 @@
 <!DOCTYPE html>
 <html lang="pl">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing page</title>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <nav class="nav">
-            <div class="nav-wrapper">
-                <div class="logo">
-                    <img src="./img/icons/logo.svg" alt="logo firmy" title="logo firmy" />
-                </div>
-                <div class="navigation">
-                    <ul class="navigation-list">
-                        <li class="navigation-list__item">
-                            <a href="#" class="navigation-list__link">Nav Link</a>
-                        </li>
-                        <li class="navigation-list__item">
-                            <a href="# " class="navigation-list__link">Nav Link</a>
-                        </li>
-                        <li class="navigation-list__item">
-                            <a href="#" class="navigation-list__link">Nav Link</a>
-                        </li>
-                        <li class="navigation-list__item">
-                            <a href="# " class="navigation-list__link">Nav Link</a>
-                        </li>
-                        <li class="navigation-list__item">
-                            <a href="#" class="btn btn-primary">Work with us</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="nav-wrapper-mobile">
-                <div class="logo">
-                    <img src="./img/icons/logo.svg" alt="logo firmy" title="logo firmy" />
-                </div>
-                <div class="nav-hamburger">
-                    <span class="nav-hamburger__item"></span>
-                </div>
-            </div>
-        </nav>
+      <nav class="nav">
+        <div class="nav-wrapper">
+          <div class="logo">
+            <img
+              src="./img/icons/logo.svg"
+              alt="logo firmy"
+              title="logo firmy"
+            />
+          </div>
+          <div class="navigation">
+            <ul class="navigation-list">
+              <li class="navigation-list__item">
+                <a href="#" class="navigation-list__link">Nav Link</a>
+              </li>
+              <li class="navigation-list__item">
+                <a href="# " class="navigation-list__link">Nav Link</a>
+              </li>
+              <li class="navigation-list__item">
+                <a href="#" class="navigation-list__link">Nav Link</a>
+              </li>
+              <li class="navigation-list__item">
+                <a href="# " class="navigation-list__link">Nav Link</a>
+              </li>
+              <li class="navigation-list__item">
+                <a href="#" class="btn btn-primary">Work with us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="nav-wrapper-mobile">
+          <div class="logo">
+            <img
+              src="./img/icons/logo.svg"
+              alt="logo firmy"
+              title="logo firmy"
+            />
+          </div>
+          <div class="nav-hamburger">
+            <span class="nav-hamburger__item"></span>
+          </div>
+        </div>
+      </nav>
     </div>
     <main>
-        <article>
-            <div class="slider">
-                <div class="container">
-                    <div class="slides"></div>
-                    <div class="indicators"></div>
-                </div>
+      <article>
+        <div class="slider">
+          <div class="container">
+            <div class="slides"></div>
+            <div class="indicators"></div>
+          </div>
+        </div>
+      </article>
+      <div class="container">
+        <section class="about">
+          <div class="row gap-2 align-items-center">
+            <div class="col-12 col-lg-5">
+              <div class="section-image">
+                <img
+                  src="./img/typography/img-left.jpg"
+                  alt="Zdjęcie sekcji"
+                  title="zdjęcie sekcji"
+                />
+              </div>
             </div>
-        </article>
-    </main>
-</body>
+            <div class="col-12 col-lg-6 offset-lg-1">
+              <h2 class="h2">You’re in good hands</h2>
+              <div class="section-content">
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Consectetur, est culpa odio esse quisquam doloremque nostrum
+                  nisi, delectus nesciunt modi explicabo aspernatur, voluptate
+                  voluptas asperiores pariatur? Tempore ab nemo optio.
+                </p>
+                <a class="btn btn-primary" href="#">Learn more</a>
+              </div>
+            </div>
+          </div>
+        </section>
 
+        <section class="find-place dark-section">
+          <h2>Find your next place to live</h2>
+          <div class="place-options">
+            <button class="place-options__option place-options__option--active">
+              Looking For
+            </button>
+            <button class="place-options__option">location</button>
+            <button class="place-options__option">price</button>
+          </div>
+
+          <div class="place-options__score white-section">
+            <div class="place-options__score-wrapper">
+              <div class="place-options__score-element">Home</div>
+            </div>
+            <div class="place-options__score-wrapper">
+              <div class="place-options__score-element">usa</div>
+              <div class="place-options__score-element">poland</div>
+              <div class="place-options__score-element">turkey</div>
+            </div>
+            <div class="place-options__score-wrapper">
+              <div class="place-options__score-element">550000</div>
+              <div class="place-options__score-element">450000</div>
+              <div class="place-options__score-element">400000</div>
+            </div>
+          </div>
+
+          <div class="products">
+            <div class="products__product"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
 </html>
