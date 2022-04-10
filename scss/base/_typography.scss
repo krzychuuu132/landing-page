@@ -92,11 +92,12 @@ h5 {
     width: fit-content;
     text-decoration: none;
     @include transition;
+    margin-top: 3rem;
     @include media-breakpoint-up(lg) {
         font-size: 1.9rem;
     }
     &::after {
-        content: url("../images/icons/arrow.svg");
+        content: url("../img/icons/arrow.svg");
         display: inline-block;
         margin-left: 1rem;
         transform: translateY(-0.2rem);
@@ -114,7 +115,7 @@ h5 {
         background-color: $secondary;
         color: $white;
         &::after {
-            content: url("../images/icons/arrow_primary.svg");
+            content: url("../img/icons/arrow_primary.svg");
         }
         @include media-breakpoint-up(xl) {
             &:hover {
@@ -128,7 +129,6 @@ h5 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
 }
 
 .section-image {

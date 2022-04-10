@@ -21,5 +21,9 @@
     gap: 2rem 0;
 }
 
+.align-items-center {
+    align-items: center
+}
+
 @include make-grid-columns();
 @include make-grid-containers();
