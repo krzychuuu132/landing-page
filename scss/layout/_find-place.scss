@@ -50,11 +50,13 @@
 
     &__score {
       display: flex;
+      flex-wrap: wrap;
       gap: 2rem 3rem;
       padding: 3rem 0;
 
       &-wrapper {
         display: flex;
+        flex-wrap: wrap;
         gap: 2rem 3rem;
       }
 
