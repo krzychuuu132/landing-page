@@ -10,7 +10,7 @@ export class Indicator {
 
   render(): string {
     const html: string = `
-      <button class="indicators__indicator"></button>
+      <button class="indicators__indicator ${this.index === 0 ? "active" : ""}" data-id="${this.index}"></button>
       `;
     return html;
   }
