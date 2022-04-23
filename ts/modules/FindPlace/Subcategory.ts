@@ -1,4 +1,5 @@
-import { CategoryData, SubcategoryData } from "./Categories";
+import { CategoryData, ProductsData } from "./Categories";
+import { Products } from "./Products";
 
 export class Subcategory {
   item: CategoryData;
@@ -7,10 +8,19 @@ export class Subcategory {
     this.item = item;
     this.index = index;
   }
+
+  renderProducts(productsData: ProductsData[]) {
+    const products: string = new Products(productsData).render();
+
+    return products;
+  }
   render() {
     const { subcategory } = this.item;
 
-    const getSubCategory = subcategory.map((item) => `<div class="place-options__score-element">${item.title}</div>`);
+    const getSubCategory = subcategory.map((item) => {
+      this.renderProducts(item.products);
+      return `<div class="place-options__score-element">${item.title}</div>`;
+    });
 
     const html: string = `
     <div class="place-options__score-wrapper ${this.index === 0 ? "place-options__score-wrapper--active" : ""}">
@@ -18,6 +28,6 @@ export class Subcategory {
     </div>
     </div>
     `;
-    return html;
+    return html.replace(",", "");
   }
 }

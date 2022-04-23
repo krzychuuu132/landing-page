@@ -14,20 +14,26 @@ class Category extends Page {
 
   renderSubcategory() {
     const sucategories: string = new Subcategory(this.index, this.categoryData).render();
-    return sucategories;
+    return sucategories.replace(",", "");
   }
 
-  render() {
-    const subcategoriesWrapper: HTMLElement = document.querySelector(".place-options__score");
-    const subcategories = this.renderSubcategory();
-    super.renderHTML(subcategoriesWrapper, subcategories);
-    console.log(subcategories);
+  returnHTML() {
     const { title } = this.categoryData;
     const html: string = `
     <button class="place-options__option ${this.index === 0 ? "place-options__option--active" : ""}">
         ${title}
     </button>
     `;
+    return html;
+  }
+
+  render() {
+    const subcategoriesWrapper: HTMLElement = document.querySelector(".place-options__score");
+    const subcategories = this.renderSubcategory();
+    super.renderHTML(subcategoriesWrapper, subcategories);
+
+    const html: string = this.returnHTML();
+
     return html;
   }
 }
