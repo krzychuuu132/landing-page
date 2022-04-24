@@ -13,7 +13,7 @@ class Category extends Page {
   }
 
   renderSubcategory() {
-    const sucategories: string = new Subcategory(this.index, this.categoryData).render();
+    const sucategories: string = new Subcategory(this.index, this.categoryData, super.renderHTML).render();
     return sucategories.replace(",", "");
   }
 
