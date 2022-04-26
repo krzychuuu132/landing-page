@@ -48,7 +48,7 @@ class Categories extends Page {
   }
 
   renderCategories(): string[] {
-    const categories: string[] = this.data[0].category.map((item, index) => new Category(item, index).render());
+    const categories: string[] = this.data[0].category.map((item, index) => new Category(item, index, this.data).render());
     return categories;
   }
 

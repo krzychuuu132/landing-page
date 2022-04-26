@@ -10,14 +10,14 @@ export class Products {
   }
 
   renderProduct() {
-    const product: string = new Product(this.productsData).render();
+    const product: string[] = this.productsData.map((product) => new Product(product).render());
 
     return product;
   }
 
   render() {
     const productsWrapper: HTMLElement = document.querySelector(".products");
-    const product: string = this.renderProduct();
+    const product: string[] = this.renderProduct();
 
     this.renderHtml(productsWrapper, product);
 

@@ -76,6 +76,11 @@
         cursor: pointer;
         @include transition;
 
+        &--active {
+          background-color: $primary;
+          color: $white;
+        }
+
         @include media-breakpoint-up(xl) {
           &:hover {
             background-color: $primary;
