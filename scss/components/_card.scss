@@ -1,0 +1,18 @@
+.card {
+  background-color: $white;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 4rem;
+  }
+  z-index: 1;
+  &__heading {
+    padding: 3rem;
+    border-bottom: 0.1rem solid $gray-400;
+  }
+
+  &__content {
+    padding: 2rem 3rem;
+  }
+}

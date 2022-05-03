@@ -2,9 +2,17 @@ import { Page } from "../Page";
 import { Category } from "./Category";
 
 export interface ProductsData {
+  id: number;
   image: string;
   title: string;
   description?: string;
+  bathroom_tub_towel: number;
+  bedrooms: number;
+  calendars: number;
+  garages: number;
+  grid_artboard: number;
+  main_picture: number;
+  features?: String[];
 }
 
 export interface SubcategoryData {
