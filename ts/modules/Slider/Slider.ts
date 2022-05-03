@@ -21,11 +21,7 @@ export class Slider extends Page {
 
   addListeners(): void {
     const indicators = document.querySelectorAll(".indicators__indicator");
-    indicators.forEach((indicator) =>
-      indicator.addEventListener("click", (e) =>
-        this.changeSlideByIndicator(this, e)
-      )
-    );
+    indicators.forEach((indicator) => indicator.addEventListener("click", (e) => this.changeSlideByIndicator(this, e)));
 
     this.interval = setInterval(() => {
       this.counter++;
@@ -37,6 +33,10 @@ export class Slider extends Page {
 
   changeSlide(index: number) {
     const slides = document.querySelectorAll(".slides__slide");
+    if (slides.length === 0) {
+      clearInterval(this.interval);
+      return;
+    }
     const indicators = document.querySelectorAll(".indicators__indicator");
     slides.forEach((slide) => slide.classList.remove("active"));
     slides[index].classList.add("active");
@@ -50,30 +50,23 @@ export class Slider extends Page {
   changeSlideByIndicator(slider: any, e: any): void {
     const indicator: any = e.target;
     const { id } = indicator.dataset;
-    //  clearInterval(slider.interval)
     slider.counter = parseInt(id);
     slider.changeSlide(parseInt(id));
-    //  setInterval(slider.addListeners.bind(slider), 5000)
   }
 
   renderSlides(): string[] {
-    const data: string[] = this.data.map((slide, index) =>
-      new Slide(slide, index, this.counter).render()
-    );
+    const data: string[] = this.data.map((slide, index) => new Slide(slide, index, this.counter).render());
     return data;
   }
 
   renderIndicators(): string[] {
-    const data: string[] = this.data.map((slide, index) =>
-      new Indicator(index, this).render()
-    );
+    const data: string[] = this.data.map((slide, index) => new Indicator(index, this).render());
     return data;
   }
 
   render(): void {
     const sliderWrapper: HTMLElement = document.querySelector(".slides");
-    const indicatorsWrapper: HTMLElement =
-      document.querySelector(".indicators");
+    const indicatorsWrapper: HTMLElement = document.querySelector(".indicators");
     const slides: string[] = this.renderSlides();
     const indicators: string[] = this.renderIndicators();
 

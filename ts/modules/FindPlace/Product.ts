@@ -1,19 +1,42 @@
 import { ProductsData } from "./Categories";
-
+import { SingleProduct } from "./SingleProduct";
+declare global {
+  interface Window {
+    handleProductClick: any;
+  }
+}
 export class Product {
   productData: ProductsData;
-  constructor(productData: ProductsData) {
+  index: number;
+  constructor(productData: ProductsData, index: number) {
     this.productData = productData;
+    this.index = index;
+  }
+
+  handleProductClick(): any {
+    window.handleProductClick = async (product: any) => {
+      window.location.href = "#/product";
+      const singleProduct = await new SingleProduct(product);
+
+      setTimeout(() => {
+        singleProduct.render();
+      }, 100);
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    };
   }
 
   returnHTML(): string {
-    const { image, title, description } = this.productData;
+    const { image, title, id } = this.productData;
     const html: string = `
-        <div class="products__product">
+        <div class="products__product" data-id="${id}" onClick='handleProductClick(${JSON.stringify(this.productData)})'>
             <div class="products__product-picture">
-                <img src="${image}" alt="Pierwszy produkt" />
+                <img src="${image}" alt="Pierwszy produkt" class="products__product-picture_img"/>
                 <div class="products__product-picture_hover">
-                <img src="./img/icons/search.svg" alt="Ikona wyszukiwania" />
+                <img src="./img/icons/search.svg" alt="Ikona wyszukiwania"/>
                 <p>Zobacz</p>
                 </div>
             </div>
@@ -22,7 +45,7 @@ export class Product {
             </div>
         </div>
     `;
-
+    this.handleProductClick();
     return html;
   }
 

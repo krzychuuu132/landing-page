@@ -11,7 +11,7 @@ export class Slide {
   constructor(slide: SlideData, index: number, counter: number) {
     this.slide = slide;
     this.index = index;
-    this.counter = counter
+    this.counter = counter;
   }
 
   render(): string {
