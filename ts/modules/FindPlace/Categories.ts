@@ -22,6 +22,10 @@ export interface SubcategoryData {
 
 export interface CategoryData {
   title: string;
+  id: number;
+  name: string;
+  slug: string;
+  display: string;
   subcategory: Array<SubcategoryData>;
 }
 
@@ -33,11 +37,13 @@ class Categories extends Page {
   data: Array<CategoriesData>;
   categories: NodeList;
   subcategory: NodeList;
+  categoriesData: Array<CategoryData>;
   constructor(data: Array<CategoriesData>) {
     super();
     this.data = data;
     this.categories = document.querySelectorAll(".place-options__option");
     this.subcategory = document.querySelectorAll(".place-options__score-wrapper");
+    this.categoriesData = [];
   }
 
   changeOption(index: number, e: any, categories: HTMLCollection) {
@@ -45,22 +51,31 @@ class Categories extends Page {
     const categoryClassName = e.target.className.trim();
     [...categories].forEach((category, index) => {
       category.classList.remove(`${categoryClassName}--active`);
-      subcategory[index].classList.remove(`${subcategory[index].className.split(" ")[0]}--active`);
+      // subcategory[index].classList.remove(`${subcategory[index].className.split(" ")[0]}--active`);
     });
     e.target.classList.toggle(`${categoryClassName}--active`);
-    subcategory[index].classList.toggle(`${subcategory[index].className.split(" ")[0]}--active`);
+    // subcategory[index].classList.toggle(`${subcategory[index].className.split(" ")[0]}--active`);
   }
 
   addListeners(categories: HTMLCollection): void {
     [...categories].forEach((category, index: number) => category.addEventListener("click", (e) => this.changeOption(index, e, categories)));
   }
 
-  renderCategories(): string[] {
-    const categories: string[] = this.data[0].category.map((item, index) => new Category(item, index, this.data).render());
+  async fetchCategories() {
+    const getCategories = await this.fetchData("products/categories");
+    this.categoriesData = getCategories;
+    return getCategories;
+  }
+
+  renderCategories() {
+    const getMainCategory = this.categoriesData.filter((category) => category.display === "default" && category.slug !== "bez-kategorii");
+    const categories: string[] = getMainCategory.map((item, index) => new Category(item, index, this.data).render());
     return categories;
   }
 
-  render(): void {
+  async render(): Promise<void> {
+    await this.fetchCategories();
+    this.renderCategories();
     const categoriesWrapper: HTMLElement = document.querySelector(".place-options");
     const categories: string[] = this.renderCategories();
 
