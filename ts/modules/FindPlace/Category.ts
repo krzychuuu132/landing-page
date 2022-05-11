@@ -14,25 +14,25 @@ class Category extends Page {
     this.index = index;
   }
 
-  renderSubcategory() {
-    const sucategories: string = new Subcategory(this.index, this.categoryData, super.renderHTML, this.categoriesData).render();
-    return sucategories;
-  }
+  // renderSubcategory() {
+  //   const sucategories: string = new Subcategory(this.index, this.categoryData, super.renderHTML, this.categoriesData).render();
+  //   return sucategories;
+  // }
 
   returnHTML() {
-    const { title } = this.categoryData;
+    const { name } = this.categoryData;
     const html: string = `
     <button class="place-options__option ${this.index === 0 ? "place-options__option--active" : ""}">
-        ${title}
+        ${name}
     </button>
     `;
     return html;
   }
 
-  render() {
-    const subcategoriesWrapper: HTMLElement = document.querySelector(".place-options__score");
-    const subcategories = this.renderSubcategory();
-    super.renderHTML(subcategoriesWrapper, subcategories);
+  render(): string {
+    // const subcategoriesWrapper: HTMLElement = document.querySelector(".place-options__score");
+    // const subcategories = this.renderSubcategory();
+    // super.renderHTML(subcategoriesWrapper, subcategories);
 
     const html: string = this.returnHTML();
 
