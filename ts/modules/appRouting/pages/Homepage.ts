@@ -86,6 +86,7 @@ export let HomePage = {
         </div>
 
         <div class="products">
+              <h3>Wybierz kategorię...</h3>
          </div>
       </section>
 
@@ -188,9 +189,8 @@ export let HomePage = {
       const sliderData: Array<any> = page.getDataToComponent("slides");
       const slider = new Slider(sliderData);
 
-      // FIND YOUR NEXT PLACE
-      const categoryData: Array<any> = page.getDataToComponent("location");
-      const category = new Categories(categoryData);
+      // FIND YOUR NEXT PLACE;
+      const category = new Categories();
       category.render();
 
       slider.render();

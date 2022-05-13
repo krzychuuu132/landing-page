@@ -1,27 +1,36 @@
-import { CategoryData, ProductsData } from "./Categories";
+import { Page } from "../Page";
+import { CategoryData, ProductData } from "./Categories";
 import { Product } from "./Product";
 
-export class Products {
-  productsData: ProductsData[];
-  renderHtml: Function;
-  constructor(productsData: ProductsData[], renderHtml: Function) {
-    this.productsData = productsData;
-    this.productsData = productsData;
-    this.renderHtml = renderHtml;
+export class Products extends Page {
+  subcategoryID: number;
+  products: Array<ProductData>;
+  constructor(subcategoryID: number) {
+    super();
+    this.subcategoryID = subcategoryID;
+    this.products = [];
   }
 
   renderProduct() {
-    const product: string[] = this.productsData.map((product, index) => new Product(product, index).render());
-
+    const product: string[] = this.products.map((product, index) => new Product(product, index).render());
     return product;
   }
 
-  render() {
+  async fetchProducts() {
+    const products = await this.fetchData("products", {
+      category: this.subcategoryID,
+    });
+    this.products = products;
+  }
+
+  async render(): Promise<string> {
     const productsWrapper: HTMLElement = document.querySelector(".products");
+    await this.fetchProducts();
+    this.renderProduct();
     const product: string[] = this.renderProduct();
 
-    this.renderHtml(productsWrapper, product);
+    this.renderHTML(productsWrapper, product);
 
-    return product;
+    return "product";
   }
 }
