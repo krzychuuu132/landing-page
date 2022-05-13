@@ -1,31 +1,42 @@
 import { Page } from "../Page";
 import { Category } from "./Category";
 
-export interface ProductsData {
+interface ProductImages {
+  src: string;
+}
+export interface ProductData {
   id: number;
-  image: string;
-  title: string;
+  images: Array<ProductImages>;
+  name: string;
   description?: string;
-  bathroom_tub_towel: number;
-  bedrooms: number;
-  calendars: number;
-  garages: number;
-  grid_artboard: number;
-  main_picture: number;
-  features?: String[];
 }
 
 export interface SubcategoryData {
-  title: string;
-  products: Array<ProductsData>;
-}
-
-export interface CategoryData {
   title: string;
   id: number;
   name: string;
   slug: string;
   display: string;
+  products: Array<ProductData>;
+}
+
+interface LinkHref {
+  href: string;
+}
+
+interface SubcategoryLinks {
+  collection: Array<LinkHref>;
+  self: Array<LinkHref>;
+}
+
+export interface CategoryData {
+  title: string;
+  id: number;
+  parent: number;
+  name: string;
+  slug: string;
+  display: string;
+  _links: SubcategoryLinks;
   subcategory: Array<SubcategoryData>;
 }
 
@@ -34,13 +45,11 @@ export interface CategoriesData {
 }
 
 class Categories extends Page {
-  data: Array<CategoriesData>;
   categories: NodeList;
   subcategory: NodeList;
   categoriesData: Array<CategoryData>;
-  constructor(data: Array<CategoriesData>) {
+  constructor() {
     super();
-    this.data = data;
     this.categories = document.querySelectorAll(".place-options__option");
     this.subcategory = document.querySelectorAll(".place-options__score-wrapper");
     this.categoriesData = [];
@@ -51,10 +60,10 @@ class Categories extends Page {
     const categoryClassName = e.target.className.trim();
     [...categories].forEach((category, index) => {
       category.classList.remove(`${categoryClassName}--active`);
-      // subcategory[index].classList.remove(`${subcategory[index].className.split(" ")[0]}--active`);
+      subcategory[index].classList.remove(`${subcategory[index].className.split(" ")[0]}--active`);
     });
     e.target.classList.toggle(`${categoryClassName}--active`);
-    // subcategory[index].classList.toggle(`${subcategory[index].className.split(" ")[0]}--active`);
+    subcategory[index].classList.toggle(`${subcategory[index].className.split(" ")[0]}--active`);
   }
 
   addListeners(categories: HTMLCollection): void {
@@ -69,13 +78,14 @@ class Categories extends Page {
 
   renderCategories() {
     const getMainCategory = this.categoriesData.filter((category) => category.display === "default" && category.slug !== "bez-kategorii");
-    const categories: string[] = getMainCategory.map((item, index) => new Category(item, index, this.data).render());
+    const categories: string[] = getMainCategory.map((item, index) =>
+      new Category(item, index, this.categoriesData, { categoryTitle: item.slug, categoryID: item.id }).render()
+    );
     return categories;
   }
 
   async render(): Promise<void> {
     await this.fetchCategories();
-    this.renderCategories();
     const categoriesWrapper: HTMLElement = document.querySelector(".place-options");
     const categories: string[] = this.renderCategories();
 

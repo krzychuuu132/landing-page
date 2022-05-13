@@ -1,4 +1,4 @@
-import { ProductsData } from "./Categories";
+import { ProductData } from "./Categories";
 import { SingleProduct } from "./SingleProduct";
 declare global {
   interface Window {
@@ -6,16 +6,16 @@ declare global {
   }
 }
 export class Product {
-  productData: ProductsData;
+  productData: ProductData;
   index: number;
-  constructor(productData: ProductsData, index: number) {
+  constructor(productData: ProductData, index: number) {
     this.productData = productData;
     this.index = index;
   }
 
-  handleProductClick(): any {
+  handleProductClick(id: number): any {
     window.handleProductClick = async (product: any) => {
-      window.location.href = "#/product";
+      window.location.href = `#/product&id=${id}`;
       const singleProduct = await new SingleProduct(product);
 
       setTimeout(() => {
@@ -30,22 +30,23 @@ export class Product {
   }
 
   returnHTML(): string {
-    const { image, title, id } = this.productData;
+    const { images, name, id } = this.productData;
+    console.log(this.productData);
     const html: string = `
         <div class="products__product" data-id="${id}" onClick='handleProductClick(${JSON.stringify(this.productData)})'>
             <div class="products__product-picture">
-                <img src="${image}" alt="Pierwszy produkt" class="products__product-picture_img"/>
+                <img src="${images[0].src}" alt="Pierwszy produkt" class="products__product-picture_img"/>
                 <div class="products__product-picture_hover">
                 <img src="./img/icons/search.svg" alt="Ikona wyszukiwania"/>
                 <p>Zobacz</p>
                 </div>
             </div>
             <div class="products__product-content">
-                <h3 class="products__product-content_title">${title}</h3>
+                <h3 class="products__product-content_title">${name}</h3>
             </div>
         </div>
     `;
-    this.handleProductClick();
+    this.handleProductClick(id);
     return html;
   }
 

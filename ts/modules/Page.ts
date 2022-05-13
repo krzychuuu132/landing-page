@@ -34,9 +34,9 @@ export class Page {
     }
   }
 
-  async fetchData(option: string) {
+  async fetchData(option: string, params?: Object) {
     try {
-      const { data } = await this.initWoocommerceAPI().get(option);
+      const { data } = await this.initWoocommerceAPI().get(option, params);
       return data;
     } catch (err) {
       throw new Error(err);
