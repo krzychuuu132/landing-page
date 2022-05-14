@@ -12,10 +12,14 @@ const router = async () => {
   const content = null || document.getElementById("root");
 
   let request = Utils.parseRequestURL();
+  console.log(request);
 
   let parsedURL = (request.resource ? "/" + request.resource : "/") + (request.id ? "/" : "") + (request.verb ? "/" + request.verb : "");
 
-  let page = routes[parsedURL] ? routes[parsedURL] : Error404;
+  const startIndexParams = parsedURL.indexOf("?");
+  const basePath = parsedURL.slice(0, startIndexParams) || "/";
+
+  let page = routes[basePath] ? routes[basePath] : Error404;
   content.innerHTML = await page.render();
   await page.after_render();
 };
