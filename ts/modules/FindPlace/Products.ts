@@ -17,9 +17,13 @@ export class Products extends Page {
   }
 
   async fetchProducts() {
-    const products = await this.fetchData("products", {
-      category: this.subcategoryID,
-    });
+    const products = await this.fetchData(
+      "products",
+      {
+        category: this.subcategoryID,
+      },
+      ".products"
+    );
     this.products = products;
   }
 

@@ -34,12 +34,16 @@ export class Page {
     }
   }
 
-  async fetchData(option: string, params?: Object) {
+  async fetchData(option: string, params?: Object, parentLoaderElementClassName?: string) {
+    const loader: HTMLElement = document.querySelector(`${parentLoaderElementClassName ? parentLoaderElementClassName : ""} .loader`);
+    loader ? loader.classList.add("loader--active") : null;
     try {
       const { data } = await this.initWoocommerceAPI().get(option, params);
       return data;
     } catch (err) {
       throw new Error(err);
+    } finally {
+      loader ? loader.classList.remove("loader--active") : null;
     }
   }
 

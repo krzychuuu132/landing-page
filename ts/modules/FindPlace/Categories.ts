@@ -4,11 +4,19 @@ import { Category } from "./Category";
 interface ProductImages {
   src: string;
 }
+
+interface ProductFeature {
+  title: string;
+}
+interface ProductFeatures {
+  features: Array<ProductFeature>;
+}
 export interface ProductData {
   id: number;
   images: Array<ProductImages>;
   name: string;
   description?: string;
+  acf: ProductFeatures;
 }
 
 export interface SubcategoryData {
@@ -46,32 +54,36 @@ export interface CategoriesData {
 
 class Categories extends Page {
   categories: NodeList;
-  subcategory: NodeList;
+  subcategories: NodeList;
   categoriesData: Array<CategoryData>;
   constructor() {
     super();
     this.categories = document.querySelectorAll(".place-options__option");
-    this.subcategory = document.querySelectorAll(".place-options__score-wrapper");
+    this.subcategories = document.querySelectorAll(".place-options__score-wrapper");
     this.categoriesData = [];
   }
 
-  changeOption(index: number, e: any, categories: HTMLCollection) {
-    const subcategory: any = [...document.querySelectorAll(".place-options__score-wrapper")];
+  changeOption(index: number, e: any, category: Element, categories: any) {
+    const subcategories: any = [...document.querySelectorAll(".place-options__score-wrapper")];
     const categoryClassName = e.target.className.trim();
-    [...categories].forEach((category, index) => {
-      category.classList.remove(`${categoryClassName}--active`);
-      subcategory[index].classList.remove(`${subcategory[index].className.split(" ")[0]}--active`);
-    });
-    e.target.classList.toggle(`${categoryClassName}--active`);
-    subcategory[index].classList.toggle(`${subcategory[index].className.split(" ")[0]}--active`);
+
+    // Category toggler
+    categories.forEach((category: HTMLElement) => category.classList.remove(`${categoryClassName}--active`));
+    category.classList.add(`${categoryClassName}--active`);
+
+    // Subcategory toggler
+    subcategories.forEach((subcategory: HTMLElement) => subcategory.classList.remove(`${subcategories[index - 1].className.split(" ")[0]}--active`));
+    subcategories[index - 1].classList.add(`${subcategories[index - 1].className.split(" ")[0]}--active`);
   }
 
   addListeners(categories: HTMLCollection): void {
-    [...categories].forEach((category, index: number) => category.addEventListener("click", (e) => this.changeOption(index, e, categories)));
+    [...categories].forEach((category, index: number) =>
+      category.addEventListener("click", (e) => this.changeOption(index, e, category, [...categories]))
+    );
   }
 
   async fetchCategories() {
-    const getCategories = await this.fetchData("products/categories");
+    const getCategories = await this.fetchData("products/categories", null, ".place-options");
     this.categoriesData = getCategories;
     return getCategories;
   }

@@ -1,3 +1,5 @@
+import { SingleProduct } from "../../FindPlace/SingleProduct";
+
 export let Product = {
   render: async () => {
     let view = /*html*/ `
@@ -117,5 +119,9 @@ export let Product = {
             `;
     return view;
   },
-  after_render: async () => {},
+  after_render: async () => {
+    const SingleProductInstance: SingleProduct = new SingleProduct();
+    const product = await SingleProductInstance.fetchProduct();
+    SingleProductInstance.render(...product);
+  },
 };
