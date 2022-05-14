@@ -23,8 +23,8 @@ export class Subcategory extends Page {
 
   handleSubcategoryClick() {
     window.handleSubcategoryClick = (index: number, title: string, subcategoryID: number) => {
+      document.querySelectorAll(".products__product, .products h3").forEach((items) => items.remove());
       this.renderProducts(subcategoryID);
-      document.querySelector(".products").innerHTML = "";
       const subcategoryElements = document.querySelectorAll(".place-options__score-element");
       let subcategoryClassName;
       subcategoryElements.forEach((subcategoryElement: HTMLElement) => {

@@ -15,7 +15,7 @@ export class Product {
 
   handleProductClick(id: number): any {
     window.handleProductClick = async (product: any) => {
-      window.location.href = `#/product&id=${id}`;
+      window.location.href = `#/product?id=${id}`;
       const singleProduct = await new SingleProduct(product);
 
       setTimeout(() => {

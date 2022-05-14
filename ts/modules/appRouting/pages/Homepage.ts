@@ -79,13 +79,16 @@ export let HomePage = {
       <section class="find-place dark-section">
         <h2>Find your next place to live</h2>
         <div class="place-options">
+            <div class="loader"></div>
         </div>
 
         <div class="place-options__score white-section">
-          
+            <div class="loader"></div>
         </div>
+       
 
         <div class="products">
+              <div class="loader"></div>
               <h3>Wybierz kategorię...</h3>
          </div>
       </section>
