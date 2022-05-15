@@ -23,7 +23,9 @@ export class Page {
     return WooCommerce;
   }
 
-  async getDataFromPage(): Promise<Array<any>> {
+  async getDataFromPage(parentLoaderElementClassName?: string): Promise<Array<any>> {
+    const loader: HTMLElement = document.querySelector(`${parentLoaderElementClassName ? parentLoaderElementClassName : ""} .loader`);
+    loader ? loader.classList.add("loader--active") : null;
     try {
       const response = await fetch(this.url);
       const { acf } = await response.json();
@@ -31,6 +33,8 @@ export class Page {
       return acf;
     } catch (err) {
       console.log(err);
+    } finally {
+      loader ? loader.classList.remove("loader--active") : null;
     }
   }
 

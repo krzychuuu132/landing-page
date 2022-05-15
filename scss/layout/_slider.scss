@@ -58,6 +58,7 @@
       flex-grow: 1;
       background-color: $primary;
       cursor: pointer;
+      z-index: 1;
       @include transition;
       &.active {
         flex-grow: 2;

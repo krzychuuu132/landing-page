@@ -8,15 +8,18 @@ interface ProductImages {
 interface ProductFeature {
   title: string;
 }
-interface ProductFeatures {
+interface ACFData {
   features: Array<ProductFeature>;
+  location: string;
+  per_month: number;
 }
 export interface ProductData {
   id: number;
   images: Array<ProductImages>;
   name: string;
   description?: string;
-  acf: ProductFeatures;
+  acf: ACFData;
+  price: number;
 }
 
 export interface SubcategoryData {

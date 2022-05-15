@@ -16,11 +16,6 @@ export class Product {
   handleProductClick(id: number): any {
     window.handleProductClick = async (product: any) => {
       window.location.href = `#/product?id=${id}`;
-      const singleProduct = await new SingleProduct(product);
-
-      setTimeout(() => {
-        singleProduct.render();
-      }, 100);
 
       window.scrollTo({
         top: 0,
@@ -31,7 +26,6 @@ export class Product {
 
   returnHTML(): string {
     const { images, name, id } = this.productData;
-    console.log(this.productData);
     const html: string = `
         <div class="products__product" data-id="${id}" onClick='handleProductClick(${JSON.stringify(this.productData)})'>
             <div class="products__product-picture">

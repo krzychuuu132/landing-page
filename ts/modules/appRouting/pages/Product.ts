@@ -7,27 +7,29 @@ export let Product = {
       <nav class="nav">
         <div class="nav-wrapper">
           <div class="logo">
-            <img src="./img/icons/logo.svg" alt="logo firmy" title="logo firmy" />
+            <a href="/">
+              <img src="./img/icons/logo.svg" alt="logo firmy" title="logo firmy" />
+            </a>
           </div>
           <div class="navigation">
             <ul class="navigation-list">
               <li class="navigation-list__item">
-                <a href="#" class="navigation-list__link">Nav Link</a>
+                <a href="/#about" class="navigation-list__link">os nas</a>
               </li>
               <li class="navigation-list__item">
-                <a href="# " class="navigation-list__link">Nav Link</a>
+                <a href="/#find-home" class="navigation-list__link">Znajdź dom dla siebie</a>
               </li>
               <li class="navigation-list__item">
-                <a href="#" class="navigation-list__link">Nav Link</a>
+                <a href="/#why-us" class="navigation-list__link">dlaczego my</a>
               </li>
               <li class="navigation-list__item">
-                <a href="# " class="navigation-list__link">Nav Link</a>
+                <a href="/#news" class="navigation-list__link">aktualności</a>
               </li>
               <li class="navigation-list__item">
-                <a href="#" class="btn btn-primary">Work with us</a>
+                <a href="/#work-with-us" class="btn btn-primary">pracuj z nami</a>
               </li>
             </ul>
-          </div>
+        </div>
         </div>
         <div class="nav-wrapper-mobile">
           <div class="logo">
@@ -39,7 +41,7 @@ export let Product = {
         </div>
       </nav>  
       <main class="main">
-       
+        <div class="loader loader--singleProduct"></div>
       </main>
       <section class="about">
       <div class="row gap-2 align-items-center">
