@@ -12,24 +12,26 @@ export let HomePage = {
     <nav class="nav">
       <div class="nav-wrapper">
         <div class="logo">
-          <img src="./img/icons/logo.svg" alt="logo firmy" title="logo firmy" />
+          <a href="/">
+            <img src="./img/icons/logo.svg" alt="logo firmy" title="logo firmy" />
+          </a>
         </div>
         <div class="navigation">
           <ul class="navigation-list">
             <li class="navigation-list__item">
-              <a href="#" class="navigation-list__link">Nav Link</a>
+              <a href="/#about" class="navigation-list__link">os nas</a>
             </li>
             <li class="navigation-list__item">
-              <a href="# " class="navigation-list__link">Nav Link</a>
+              <a href="/#find-home" class="navigation-list__link">Znajdź dom dla siebie</a>
             </li>
             <li class="navigation-list__item">
-              <a href="#" class="navigation-list__link">Nav Link</a>
+              <a href="/#why-us" class="navigation-list__link">dlaczego my</a>
             </li>
             <li class="navigation-list__item">
-              <a href="# " class="navigation-list__link">Nav Link</a>
+              <a href="/#news" class="navigation-list__link">aktualności</a>
             </li>
             <li class="navigation-list__item">
-              <a href="#" class="btn btn-primary">Work with us</a>
+              <a href="/#work-with-us" class="btn btn-primary">pracuj z nami</a>
             </li>
           </ul>
         </div>
@@ -47,6 +49,7 @@ export let HomePage = {
   <main>
     <article>
       <div class="slider">
+        <div class="loader loader--slider"></div>
         <div class="container slider-container">
           <div class="slides"></div>
           <div class="indicators"></div>
@@ -54,7 +57,7 @@ export let HomePage = {
       </div>
     </article>
     <div class="container">
-      <section class="about">
+      <section class="about" id="about">
         <div class="row gap-2 align-items-center">
           <div class="col-12 col-lg-5">
             <div class="section-image">
@@ -76,7 +79,7 @@ export let HomePage = {
         </div>
       </section>
 
-      <section class="find-place dark-section">
+      <section class="find-place dark-section" id="find-home">
         <h2>Find your next place to live</h2>
         <div class="place-options">
             <div class="loader"></div>
@@ -114,7 +117,7 @@ export let HomePage = {
           </div>
         </div>
       </section>
-      <section class="content-section black-section">
+      <section class="content-section black-section" id="why-us">
         <div class="wrapper">
           <h2>You’re in good hands</h2>
           <p>
@@ -129,8 +132,8 @@ export let HomePage = {
     </div>
     </section>
     <section>
-      <div class="container">
-        <h2>Opinions</h2>
+      <div class="container" id="news">
+        <h2>Aktualności</h2>
       </div>
     </section>
     <footer class="footer black-section">
@@ -186,7 +189,7 @@ export let HomePage = {
     const renderContent = async () => {
       // PAGE
       const page = new Page();
-      await page.getDataFromPage();
+      await page.getDataFromPage(".slider");
 
       // SLIDER
       const sliderData: Array<any> = page.getDataToComponent("slides");

@@ -12,6 +12,7 @@
     width: fit-content;
     margin-bottom: 2rem;
     display: flex;
+    position: relative;
 
     &__option {
       position: relative;
@@ -53,11 +54,12 @@
       flex-wrap: wrap;
       gap: 2rem 3rem;
       padding: 3rem 0;
+      position: relative;
 
       &-wrapper {
         display: flex;
         flex-wrap: wrap;
-        gap: 2rem 3rem;
+        gap: 2rem 1rem;
         display: none;
 
         &--active {

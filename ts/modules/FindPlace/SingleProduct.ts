@@ -19,9 +19,13 @@ export class SingleProduct extends Page {
   }
 
   async fetchProduct() {
-    const product = await this.fetchData("products", {
-      include: this.productParams,
-    });
+    const product = await this.fetchData(
+      "products",
+      {
+        include: this.productParams,
+      },
+      ".main"
+    );
     return product;
   }
 
@@ -30,18 +34,19 @@ export class SingleProduct extends Page {
       name,
       images,
       description,
-      acf: { features },
+      price,
+      acf: { features, per_month, location },
     } = product;
     const html: string = `
     <div>
       <aside class="aside black-section">
         <div class="product-headings">
           <h1 class="product-headings__title h3">${name}</h1>
-          <h1 class="product-headings__price h3">$450,000</h1>
+          <h1 class="product-headings__price h3">${price} zł</h1>
         </div>
         <div class="product-details">
-          <p class="product-headings__title">3002 Foster Ave, Brooklyn, NY 11210, USA</p>
-          <p class="product-headings__price">$2,800/sq ft</p>
+          <p class="product-headings__title">${location}</p>
+          <p class="product-headings__price">${per_month} zł za 1 miesiąc</p>
         </div>
       </aside>
       <section class="product-details gray-section">
