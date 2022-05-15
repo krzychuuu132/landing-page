@@ -2,7 +2,6 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const ImageminWebpWebpackPlugin = require("imagemin-webp-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -44,20 +43,6 @@ module.exports = {
         ],
         exclude: path.resolve(__dirname, "./index.html"),
       },
-      {
-        config: [
-          {
-            test: /\.(jpe?g|png)/,
-            options: {
-              quality: 75,
-            },
-          },
-        ],
-        overrideExtension: true,
-        detailedLogs: false,
-        silent: false,
-        strict: true,
-      },
     ],
   },
   resolve: {
@@ -79,6 +64,5 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: "./img", to: "img" }],
     }),
-    new ImageminWebpWebpackPlugin(),
   ],
 };
