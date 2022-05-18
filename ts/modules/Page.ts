@@ -72,7 +72,13 @@ export class Page {
         parentElement.appendChild(htmlDoc);
       });
     } else {
-      const htmlDoc = parser.parseFromString(html, "text/html").body.children[0];
+      if (html.includes(",")) {
+        html = html
+          .split("")
+          .filter((letter) => letter !== ",")
+          .join("");
+      }
+      const htmlDoc = parser.parseFromString(html.replace(",", ""), "text/html").body.children[0];
       parentElement.appendChild(htmlDoc);
     }
   }

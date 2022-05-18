@@ -14,6 +14,7 @@ export class OpinionsSlider extends Page {
   sliderGap: number;
   slideWidth: number;
   slidesPerView: number;
+  interval: ReturnType<typeof setInterval>;
   constructor(sliderData: Array<OpinionsSliderData>) {
     super();
     this.sliderData = sliderData;
@@ -21,6 +22,7 @@ export class OpinionsSlider extends Page {
     this.sliderGap = 30;
     this.slideWidth = 450;
     this.slidesPerView = 3;
+    this.interval;
   }
 
   renderSlides() {
@@ -33,20 +35,40 @@ export class OpinionsSlider extends Page {
   }
 
   renderIndicators() {
-    const indicators: string[] = this.sliderData.map((slide) => new OpinionsIndicators().render());
+    const countIndicatorsLength: number = Math.ceil(this.sliderData.length / this.slidesPerView);
+    const range = (start: number, end: number) => {
+      return new Array(end - start + 1).fill(0).map((_, index) => start + index);
+    };
+    const newIndicatorsNumberArray: number[] = range(1, countIndicatorsLength);
+
+    const indicators: string[] = newIndicatorsNumberArray.map((_, index: number) =>
+      new OpinionsIndicators(index, this.changeSlide.bind(this), this.addInterval.bind(this), this).render()
+    );
     return indicators;
   }
 
-  changeSlide() {
-    const opinionsWrapper: HTMLElement = document.querySelector(".opinions-slider");
-    const moveSlideValue: number = this.slidesPerView * this.slideWidth + this.slidesPerView * this.sliderGap + this.slideWidth / 2;
+  addInterval() {
+    const countSliderValue = Math.ceil(this.sliderData.length / this.slidesPerView);
+    this.interval = setInterval(() => {
+      this.counter >= countSliderValue - 1 ? (this.counter = 0) : this.counter++;
+      this.changeSlide(null, "interval");
+    }, 4000);
+  }
 
-    document.body.addEventListener("click", () => {
-      opinionsWrapper.style.transform = `translateX(-${moveSlideValue}px)`;
-    });
+  changeSlide(index?: number, type?: string) {
+    if (type !== "interval") {
+      index !== undefined ? (this.counter = index) : this.counter++;
+    }
+
+    const opinionsWrapper: HTMLElement = document.querySelector(".opinions-slider");
+    const moveSlideValue: number = this.counter * (this.slidesPerView * this.slideWidth + this.slidesPerView * this.sliderGap + this.slideWidth / 2);
+
+    opinionsWrapper.style.transform =
+      this.counter === 0 ? `translateX(-${this.slideWidth / 2 + this.sliderGap}px)` : `translateX(-${moveSlideValue}px)`;
   }
 
   render() {
+    this.addInterval();
     const opinionsSliderWrapper: HTMLElement = document.querySelector(".opinions .wrapper");
     const opinionsIndicatorsWrapper: HTMLElement = document.querySelector(".opinions .wrapper");
 
@@ -64,7 +86,5 @@ export class OpinionsSlider extends Page {
 
     this.renderHTML(opinionsSliderWrapper, slider);
     this.renderHTML(opinionsIndicatorsWrapper, indicators);
-
-    this.changeSlide();
   }
 }
