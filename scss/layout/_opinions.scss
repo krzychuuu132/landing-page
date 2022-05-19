@@ -1,9 +1,15 @@
 .opinions {
+  .wrapper {
+    padding: 0 2rem;
+  }
   .opinions-slider {
     display: flex;
     gap: 2rem 3rem;
-    transform: translateX(-255px);
     transition: transform 1s ease-in-out;
+
+    @include media-breakpoint-up(xl) {
+      transform: translateX(-255px);
+    }
   }
 
   .indicators-wrapper {
@@ -21,8 +27,10 @@
       cursor: pointer;
       @include transition;
 
-      &:hover {
-        background-color: $primary;
+      @include media-breakpoint-up(xl) {
+        &:hover {
+          background-color: $primary;
+        }
       }
 
       &--active {

@@ -80,6 +80,7 @@ export class Page {
       }
       const htmlDoc = parser.parseFromString(html.replace(",", ""), "text/html").body.children[0];
       parentElement.appendChild(htmlDoc);
+      return htmlDoc;
     }
   }
 }
