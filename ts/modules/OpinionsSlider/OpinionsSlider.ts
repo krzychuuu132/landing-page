@@ -15,6 +15,8 @@ export class OpinionsSlider extends Page {
   slideWidth: number;
   slidesPerView: number;
   interval: ReturnType<typeof setInterval>;
+  indicatorsWrapperElement: Element
+  sliderWrapperElement: Element
   constructor(sliderData: Array<OpinionsSliderData>) {
     super();
     this.sliderData = sliderData;
@@ -24,6 +26,8 @@ export class OpinionsSlider extends Page {
     this.slidesPerView = 2;
     this.interval;
     this.addSliderRWD();
+    this.indicatorsWrapperElement;
+    this.sliderWrapperElement;
   }
 
   renderSlides() {
@@ -31,7 +35,7 @@ export class OpinionsSlider extends Page {
     const newSlidesArray: Array<OpinionsSliderData> = [...this.sliderData];
     this.isMobile() ? null : newSlidesArray.unshift(lastSlide);
 
-    const slides: string[] = newSlidesArray.map((slide) => new OpinionsSlide(slide).render());
+    const slides: string = newSlidesArray.map((slide) => new OpinionsSlide(slide).render()).join("");
     return slides;
   }
 
@@ -44,9 +48,9 @@ export class OpinionsSlider extends Page {
     };
     const newIndicatorsNumberArray: number[] = range(1, countIndicatorsLength);
 
-    const indicators: string[] = newIndicatorsNumberArray.map((_, index: number) =>
+    const indicators: string = newIndicatorsNumberArray.map((_, index: number) =>
       new OpinionsIndicators(index, this.changeSlide.bind(this), this.addInterval.bind(this), this).render()
-    );
+    ).join("");
     return indicators;
   }
 
@@ -106,6 +110,10 @@ export class OpinionsSlider extends Page {
     });
   }
 
+  setWrapperElement(name: string, HtmlElement: Element) {
+     this[name] = HtmlElement
+  }
+
   render() {
     this.addInterval();
     this.addSliderRWD();
@@ -124,7 +132,9 @@ export class OpinionsSlider extends Page {
         </div>
     `;
 
-    this.renderHTML(opinionsSliderWrapper, slider);
-    this.renderHTML(opinionsIndicatorsWrapper, indicators);
+    const sliderWrapperElement: Element = this.renderHTML(opinionsSliderWrapper, slider);
+    const indicatorsWrapperElement: Element = this.renderHTML(opinionsIndicatorsWrapper, indicators);
+    this.setWrapperElement('sliderWrapperElement', sliderWrapperElement)
+    this.setWrapperElement('indicatorsWrapperElement', indicatorsWrapperElement)
   }
 }

@@ -16,11 +16,23 @@ export class OpinionsIndicators {
     this.slider = slider;
   }
 
+  toggleActive(index: number) {
+    const indicators: any = [...this.slider.indicatorsWrapperElement.children]
+    indicators.forEach((indicator: HTMLElement) => indicator.classList.remove('indicator--active'))
+    const activeIndicator: any = indicators[index]
+    activeIndicator.classList.add('indicator--active')
+  }
+
+  setInterval() {
+    clearInterval(this.slider.interval);
+    this.addInterval();
+  }
+
   handleClick() {
     window.handeIndicatorClick = (index: number) => {
-      clearInterval(this.slider.interval);
+      this.setInterval();
       this.changeSlide(index);
-      this.addInterval();
+      this.toggleActive(index)
     };
   }
 

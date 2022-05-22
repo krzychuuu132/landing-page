@@ -64,21 +64,16 @@ export class Page {
     return data[name];
   }
 
-  renderHTML(parentElement: HTMLElement, html: string | Array<string>) {
+  renderHTML(parentElement: HTMLElement, html: string | Array<string>): Element | HTMLElement {
     const parser = new DOMParser();
     if (typeof html !== "string") {
       html.forEach((item) => {
         const htmlDoc = parser.parseFromString(item, "text/html").body.children[0];
         parentElement.appendChild(htmlDoc);
+        return htmlDoc
       });
     } else {
-      if (html.includes(",")) {
-        html = html
-          .split("")
-          .filter((letter) => letter !== ",")
-          .join("");
-      }
-      const htmlDoc = parser.parseFromString(html.replace(",", ""), "text/html").body.children[0];
+      const htmlDoc = parser.parseFromString(html, "text/html").body.children[0];
       parentElement.appendChild(htmlDoc);
       return htmlDoc;
     }
