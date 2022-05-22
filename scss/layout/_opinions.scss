@@ -1,0 +1,41 @@
+.opinions {
+  .wrapper {
+    padding: 0 2rem;
+  }
+  .opinions-slider {
+    display: flex;
+    gap: 2rem 3rem;
+    transition: transform 1s ease-in-out;
+
+    @include media-breakpoint-up(xl) {
+      transform: translateX(-255px);
+    }
+  }
+
+  .indicators-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 0 1rem;
+    margin-top: 3rem;
+
+    .indicator {
+      width: 1.5rem;
+      height: 1.5rem;
+      background-color: $gray-400;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      @include transition;
+
+      @include media-breakpoint-up(xl) {
+        &:hover {
+          background-color: $primary;
+        }
+      }
+
+      &--active {
+        background-color: $primary;
+      }
+    }
+  }
+}

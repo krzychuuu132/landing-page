@@ -40,7 +40,7 @@ export class Subcategory extends Page {
     this.handleSubcategoryClick();
     const getSubCategory = this.subcategoryData.map((item, index) => {
       return `<div class="place-options__score-element" data-title='${item.slug}' onClick="handleSubcategoryClick(${index},'${item.slug}',${item.id})">${item.name}</div>`;
-    });
+    }).join("");
 
     const html: string = `
     <div class="place-options__score-wrapper ${this.index === 0 ? "place-options__score-wrapper--active" : ""}">

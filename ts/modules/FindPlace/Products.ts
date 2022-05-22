@@ -12,7 +12,7 @@ export class Products extends Page {
   }
 
   renderProduct() {
-    const product: string[] = this.products.map((product, index) => new Product(product, index).render());
+    const product: string = this.products.map((product, index) => new Product(product, index).render()).join("");
     return product;
   }
 
@@ -31,7 +31,7 @@ export class Products extends Page {
     const productsWrapper: HTMLElement = document.querySelector(".products");
     await this.fetchProducts();
     this.renderProduct();
-    const product: string[] = this.renderProduct();
+    const product: string = this.renderProduct();
 
     this.renderHTML(productsWrapper, product);
 

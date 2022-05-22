@@ -1,4 +1,5 @@
 import { SingleProduct } from "../../FindPlace/SingleProduct";
+import { MobileMenu } from "../../MobileMenu";
 
 export let Product = {
   render: async () => {
@@ -23,7 +24,7 @@ export let Product = {
                 <a href="/#why-us" class="navigation-list__link">dlaczego my</a>
               </li>
               <li class="navigation-list__item">
-                <a href="/#news" class="navigation-list__link">aktualności</a>
+                <a href="/#opinions" class="navigation-list__link">Opinie</a>
               </li>
               <li class="navigation-list__item">
                 <a href="/#work-with-us" class="btn btn-primary">pracuj z nami</a>
@@ -122,6 +123,14 @@ export let Product = {
     return view;
   },
   after_render: async () => {
+    const navigation: HTMLElement = document.querySelector(".nav");
+    const hamburger: HTMLElement = document.querySelector(".nav-hamburger");
+
+    if (navigation) {
+      const mobileMenu = new MobileMenu(hamburger, navigation);
+      mobileMenu.addListeners();
+    }
+
     const SingleProductInstance: SingleProduct = new SingleProduct();
     const product = await SingleProductInstance.fetchProduct();
     SingleProductInstance.render(...product);

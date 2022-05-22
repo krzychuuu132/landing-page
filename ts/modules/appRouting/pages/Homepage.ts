@@ -3,6 +3,7 @@ import { Categories } from "../../../modules/FindPlace/Categories";
 import { MobileMenu } from "../../MobileMenu";
 import { Page } from "../../Page";
 import { Slider } from "../../../modules/Slider/Slider";
+import { OpinionsSlider } from "../../OpinionsSlider/OpinionsSlider";
 
 export let HomePage = {
   render: async () => {
@@ -131,10 +132,11 @@ export let HomePage = {
         </div>
     </div>
     </section>
-    <section>
-      <div class="container" id="news">
-        <h2>Aktualności</h2>
+    <section class="opinions dark-section">
+      <div class="container">
+        <h2>Opinie</h2>
       </div>
+      <div class="wrapper"></div>
     </section>
     <footer class="footer black-section">
       <div class="container">
@@ -193,13 +195,19 @@ export let HomePage = {
 
       // SLIDER
       const sliderData: Array<any> = page.getDataToComponent("slides");
-      const slider = new Slider(sliderData);
+      const NewSlider = new Slider(sliderData);
 
       // FIND YOUR NEXT PLACE;
       const category = new Categories();
       category.render();
 
-      slider.render();
+      NewSlider.render();
+
+      // OPINIONS SLIDER
+
+      const opinionsSliderData = page.getDataToComponent("slide");
+      const NewOpinionsSlider = new OpinionsSlider(opinionsSliderData);
+      NewOpinionsSlider.render();
     };
     renderContent();
   },
