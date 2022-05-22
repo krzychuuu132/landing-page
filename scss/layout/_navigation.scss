@@ -147,11 +147,16 @@
     }
 
     &--active {
+
         .nav-wrapper {
             transform: translateX(0);
         }
 
         .nav-hamburger {
+            position: fixed;
+            right: 2rem;
+            top: 2rem;
+
             &__item {
                 transform: translateX(-100%);
                 background-color: transparent;
