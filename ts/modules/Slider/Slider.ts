@@ -1,12 +1,7 @@
 import { Page } from "../Page";
 import { Indicator } from "./Indicator";
+import { SliderData } from "./interfaces";
 import { Slide } from "./Slide";
-
-interface SliderData {
-  title: string;
-  description: string;
-  image: string;
-}
 
 export class Slider extends Page {
   counter: number;

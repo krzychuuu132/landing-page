@@ -79,11 +79,6 @@ export let Product = {
       </div>
   </div>
   </section>
-  <section>
-    <div class="container">
-      <h2>Opinions</h2>
-    </div>
-  </section>
   <footer class="footer black-section">
     <div class="container">
       <div class="footer__content">

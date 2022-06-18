@@ -1,59 +1,6 @@
 import { Page } from "../Page";
 import { Category } from "./Category";
-
-interface ProductImages {
-  src: string;
-}
-
-interface ProductFeature {
-  title: string;
-}
-interface ACFData {
-  features: Array<ProductFeature>;
-  location: string;
-  per_month: number;
-}
-export interface ProductData {
-  id: number;
-  images: Array<ProductImages>;
-  name: string;
-  description?: string;
-  acf: ACFData;
-  price: number;
-}
-
-export interface SubcategoryData {
-  title: string;
-  id: number;
-  name: string;
-  slug: string;
-  display: string;
-  products: Array<ProductData>;
-}
-
-interface LinkHref {
-  href: string;
-}
-
-interface SubcategoryLinks {
-  collection: Array<LinkHref>;
-  self: Array<LinkHref>;
-}
-
-export interface CategoryData {
-  title: string;
-  id: number;
-  parent: number;
-  name: string;
-  slug: string;
-  display: string;
-  _links: SubcategoryLinks;
-  subcategory: Array<SubcategoryData>;
-}
-
-export interface CategoriesData {
-  category: Array<CategoryData>;
-}
+import { CategoryData } from "./interfaces";
 
 class Categories extends Page {
   categories: NodeList;
