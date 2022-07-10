@@ -1,12 +1,7 @@
 import { Page } from "../Page";
+import { OpinionsSliderData } from "./interfaces";
 import { OpinionsIndicators } from "./OpinionsIndicators";
 import { OpinionsSlide } from "./OpinionsSlide";
-
-export interface OpinionsSliderData {
-  name: string;
-  stars: string[];
-  description: string;
-}
 
 export class OpinionsSlider extends Page {
   sliderData: Array<OpinionsSliderData>;
@@ -15,8 +10,8 @@ export class OpinionsSlider extends Page {
   slideWidth: number;
   slidesPerView: number;
   interval: ReturnType<typeof setInterval>;
-  indicatorsWrapperElement: Element
-  sliderWrapperElement: Element
+  indicatorsWrapperElement: Element;
+  sliderWrapperElement: Element;
   constructor(sliderData: Array<OpinionsSliderData>) {
     super();
     this.sliderData = sliderData;
@@ -48,9 +43,9 @@ export class OpinionsSlider extends Page {
     };
     const newIndicatorsNumberArray: number[] = range(1, countIndicatorsLength);
 
-    const indicators: string = newIndicatorsNumberArray.map((_, index: number) =>
-      new OpinionsIndicators(index, this.changeSlide.bind(this), this.addInterval.bind(this), this).render()
-    ).join("");
+    const indicators: string = newIndicatorsNumberArray
+      .map((_, index: number) => new OpinionsIndicators(index, this.changeSlide.bind(this), this.addInterval.bind(this), this).render())
+      .join("");
     return indicators;
   }
 
@@ -111,7 +106,7 @@ export class OpinionsSlider extends Page {
   }
 
   setWrapperElement(name: string, HtmlElement: Element) {
-     this[name] = HtmlElement
+    this[name] = HtmlElement;
   }
 
   render() {
@@ -134,7 +129,7 @@ export class OpinionsSlider extends Page {
 
     const sliderWrapperElement: Element = this.renderHTML(opinionsSliderWrapper, slider);
     const indicatorsWrapperElement: Element = this.renderHTML(opinionsIndicatorsWrapper, indicators);
-    this.setWrapperElement('sliderWrapperElement', sliderWrapperElement)
-    this.setWrapperElement('indicatorsWrapperElement', indicatorsWrapperElement)
+    this.setWrapperElement("sliderWrapperElement", sliderWrapperElement);
+    this.setWrapperElement("indicatorsWrapperElement", indicatorsWrapperElement);
   }
 }

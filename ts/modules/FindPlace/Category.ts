@@ -1,11 +1,6 @@
 import { Page } from "../Page";
-import { CategoriesData, CategoryData, SubcategoryData } from "./Categories";
+import { CategoryData, CategoryIndentifier } from "./interfaces";
 import { Subcategory } from "./Subcategory";
-
-interface CategoryIndentifier {
-  categoryID: number;
-  categoryTitle: string;
-}
 
 class Category extends Page {
   categories: NodeList;

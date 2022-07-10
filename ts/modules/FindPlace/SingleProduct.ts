@@ -1,5 +1,5 @@
 import { Page } from "../Page";
-import { ProductData } from "./Categories";
+import { ProductData } from "./interfaces";
 
 export class SingleProduct extends Page {
   product: ProductData;

@@ -1,5 +1,4 @@
-import { ProductData } from "./Categories";
-import { SingleProduct } from "./SingleProduct";
+import { ProductData } from "./interfaces";
 declare global {
   interface Window {
     handleProductClick: any;

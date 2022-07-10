@@ -1,5 +1,5 @@
 import { Page } from "../Page";
-import { CategoriesData, CategoryData } from "./Categories";
+import { CategoryData } from "./interfaces";
 import { Products } from "./Products";
 
 declare global {
@@ -38,9 +38,11 @@ export class Subcategory extends Page {
   }
   render() {
     this.handleSubcategoryClick();
-    const getSubCategory = this.subcategoryData.map((item, index) => {
-      return `<div class="place-options__score-element" data-title='${item.slug}' onClick="handleSubcategoryClick(${index},'${item.slug}',${item.id})">${item.name}</div>`;
-    }).join("");
+    const getSubCategory = this.subcategoryData
+      .map((item, index) => {
+        return `<div class="place-options__score-element" data-title='${item.slug}' onClick="handleSubcategoryClick(${index},'${item.slug}',${item.id})">${item.name}</div>`;
+      })
+      .join("");
 
     const html: string = `
     <div class="place-options__score-wrapper ${this.index === 0 ? "place-options__score-wrapper--active" : ""}">
