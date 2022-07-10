@@ -1,13 +1,13 @@
 import "../../../../scss/main.scss";
-import { Categories } from "../../../modules/FindPlace/Categories";
+import { Categories } from "../../FindPlace/Categories";
 import { MobileMenu } from "../../MobileMenu";
 import { Page } from "../../Page";
-import { Slider } from "../../../modules/Slider/Slider";
+import { Slider } from "../../Slider/Slider";
 import { OpinionsSlider } from "../../OpinionsSlider/OpinionsSlider";
 
 export let HomePage = {
-  render: async () => {
-    let view = /*html*/ `
+    render: async () => {
+        let view = /*html*/ `
     <div class="container">
     <div id="root"></div>
     <nav class="nav">
@@ -176,39 +176,39 @@ export let HomePage = {
   </main>
     `;
 
-    return view;
-  },
+        return view;
+    },
 
-  after_render: async () => {
-    const navigation: HTMLElement = document.querySelector(".nav");
-    const hamburger: HTMLElement = document.querySelector(".nav-hamburger");
+    after_render: async () => {
+        const navigation: HTMLElement = document.querySelector(".nav");
+        const hamburger: HTMLElement = document.querySelector(".nav-hamburger");
 
-    if (navigation) {
-      const mobileMenu = new MobileMenu(hamburger, navigation);
-      mobileMenu.addListeners();
-    }
+        if (navigation) {
+            const mobileMenu = new MobileMenu(hamburger, navigation);
+            mobileMenu.addListeners();
+        }
 
-    const renderContent = async () => {
-      // PAGE
-      const page = new Page();
-      await page.getDataFromPage(".slider");
+        const renderContent = async () => {
+            // PAGE
+            const page = new Page();
+            await page.getDataFromPage(".slider");
 
-      // SLIDER
-      const sliderData: Array<any> = page.getDataToComponent("slides");
-      const NewSlider = new Slider(sliderData);
+            // SLIDER
+            const sliderData: Array<any> = page.getDataToComponent("slides");
+            const NewSlider = new Slider(sliderData);
 
-      // FIND YOUR NEXT PLACE;
-      const category = new Categories();
-      category.render();
+            // FIND YOUR NEXT PLACE;
+            const category = new Categories();
+            await category.render();
 
-      NewSlider.render();
+            NewSlider.render();
 
-      // OPINIONS SLIDER
+            // OPINIONS SLIDER
 
-      const opinionsSliderData = page.getDataToComponent("slide");
-      const NewOpinionsSlider = new OpinionsSlider(opinionsSliderData);
-      NewOpinionsSlider.render();
-    };
-    renderContent();
-  },
+            const opinionsSliderData = page.getDataToComponent("slide");
+            const NewOpinionsSlider = new OpinionsSlider(opinionsSliderData);
+            NewOpinionsSlider.render();
+        };
+        await renderContent();
+    },
 };
